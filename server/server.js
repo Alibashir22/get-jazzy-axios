@@ -1,8 +1,8 @@
 const express = require('express');
 
 const app = express();
-const PORT = 5001;
-
+const PORT = 5002;
+app.use(express.json())
 const artistListArray = [
     {
         name: 'Miles Davis',
@@ -52,7 +52,14 @@ app.get('/artist', (req, res) => {
 });
 
 // TODO - Add GET for songs
-
+app.get("/song",(req,res)=>{
+ res.send(songListArray)   
+})
+app.post("/artist",(req,res)=>{
+ artistListArray.push(req.body) 
+ console.log(req.body)  
+ res.sendStatus(200)
+})
 app.listen(PORT, () => {
     console.log('listening on port', PORT)
 });
